@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button create = findViewById(R.id.create);
         Button login = findViewById(R.id.login);
+
     }
 
     public void login(View view) {
