@@ -1,5 +1,4 @@
-package com.nknahom.journalapp.journalapp.User_Account;
-
+package com.nknahom.journalapp.journalapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,12 +17,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.nknahom.journalapp.journalapp.MainActivity;
-import com.nknahom.journalapp.journalapp.R;
 
-public class CreateNewAccount extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
-    private Button btnReg;
     private EditText inName, inEmail, inPass;
 
     private FirebaseAuth fAuth;
@@ -34,12 +30,11 @@ public class CreateNewAccount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_new_account);
-
-        btnReg = findViewById(R.id.btn_reg);
-        inName = (EditText) findViewById(R.id.input_reg_name);
-        inEmail = (EditText) findViewById(R.id.input_reg_email);
-        inPass = (EditText) findViewById(R.id.input_reg_pass);
+        setContentView(R.layout.activity_sign_up);
+        Button btnReg = findViewById(R.id.signup_button);
+        inName = findViewById(R.id.create_username);
+        inEmail = findViewById(R.id.create_email);
+        inPass = findViewById(R.id.create_password);
 
         fAuth = FirebaseAuth.getInstance();
         fUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -86,14 +81,14 @@ public class CreateNewAccount extends AppCompatActivity {
 
                                                 progressDialog.dismiss();
 
-                                                Intent mainIntent = new Intent(CreateNewAccount.this, MainActivity.class);
+                                                Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                                                 startActivity(mainIntent);
                                                 finish();
-                                                Toast.makeText(CreateNewAccount.this, "User created!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SignInActivity.this, "User created!", Toast.LENGTH_SHORT).show();
 
                                             } else {
                                                 progressDialog.dismiss();
-                                                Toast.makeText(CreateNewAccount.this, "ERROR : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SignInActivity.this, "ERROR : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
 
                                         }
@@ -103,7 +98,7 @@ public class CreateNewAccount extends AppCompatActivity {
 
                             progressDialog.dismiss();
 
-                            Toast.makeText(CreateNewAccount.this, "ERROR: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, "ERROR: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
 
