@@ -1,14 +1,14 @@
-package com.nknahom.journalapp.journalapp;
+package com.nknahom.journalapp.journalapp.user_account;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,10 +17,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.nknahom.journalapp.journalapp.MainActivity;
+import com.nknahom.journalapp.journalapp.R;
 
-public class SignInActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    private EditText inName, inEmail, inPass;
+    private Button btnReg;
+    private TextInputLayout inName, inEmail, inPass;
 
     private FirebaseAuth fAuth;
     private DatabaseReference fUsersDatabase;
@@ -30,11 +33,12 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-        Button btnReg = findViewById(R.id.signup_button);
-        inName = findViewById(R.id.create_username);
-        inEmail = findViewById(R.id.create_email);
-        inPass = findViewById(R.id.create_password);
+        setContentView(R.layout.activity_register);
+
+        btnReg = findViewById(R.id.btn_reg);
+        inName = findViewById(R.id.input_reg_name);
+        inEmail = findViewById(R.id.input_reg_email);
+        inPass = findViewById(R.id.input_reg_pass);
 
         fAuth = FirebaseAuth.getInstance();
         fUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -46,9 +50,9 @@ public class SignInActivity extends AppCompatActivity {
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uname = inName.getText().toString().trim();
-                String uemail = inEmail.getText().toString().trim();
-                String upass = inPass.getText().toString().trim();
+                String uname = inName.getEditText().getText().toString().trim();
+                String uemail = inEmail.getEditText().getText().toString().trim();
+                String upass = inPass.getEditText().getText().toString().trim();
 
                 registerUser(uname, uemail, upass);
 
@@ -81,14 +85,14 @@ public class SignInActivity extends AppCompatActivity {
 
                                                 progressDialog.dismiss();
 
-                                                Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
+                                                Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
                                                 startActivity(mainIntent);
                                                 finish();
-                                                Toast.makeText(SignInActivity.this, "User created!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterActivity.this, "User created!", Toast.LENGTH_SHORT).show();
 
                                             } else {
                                                 progressDialog.dismiss();
-                                                Toast.makeText(SignInActivity.this, "ERROR : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterActivity.this, "ERROR : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
 
                                         }
@@ -98,7 +102,7 @@ public class SignInActivity extends AppCompatActivity {
 
                             progressDialog.dismiss();
 
-                            Toast.makeText(SignInActivity.this, "ERROR: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "ERROR: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
 

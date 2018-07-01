@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Journal App</string>
-    <string name="title_activity_create_news">CreateNewsActivity</string>
-    <string name="newsHeader">Header</string>
-    <string name="newsDesc">Description</string>
-    <string name="newsImage">Upload Picture</string>
-    <string name="rename_the_picture">Rename the Picture</string>
+    <string name="register">Register</string>
+    <string name="sing_in">Sign in</string>
+    <string name="delete">Delete</string>
+    <string name="new_note">New note</string>
 </resources>
